@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from model import generate
 import random
 import string
+import os
 
 # instantiating the Flask class into app
 app = Flask(__name__)
@@ -12,7 +13,7 @@ app = Flask(__name__)
 api = Api(app)
 
 # configurations 
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///generate.sqlite3"
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get['DATABASE_URL'] or "sqlite:///generate.sqlite3"
 app.config['SECRET_KEY'] = "ABCD 12345"
 
 

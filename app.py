@@ -58,11 +58,11 @@ class validate_pin(Resource):
 
         # requesting a pin from user for validation
         pin = request_data['pin']
-        sn = request_data['sn']
+        SN = request_data['SN']
 
         # searching for that paticular pin in the database
         result1 = generate.query.filter_by(pin = pin).first()
-        result2 = generate.query.filter_by(id = sn).first()
+        result2 = generate.query.filter_by(id = SN).first()
         
         # if pin is found it returns 1 for success
         if result1 == result2:

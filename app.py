@@ -52,7 +52,7 @@ class generate_pin(Resource):
 api.add_resource(generate_pin, '/api/generate') 
 
 class validate_pin(Resource):
-    def get(self):
+    def post(self):
         # instantiating the request.get_json method to enable user to enter needed information
         request_data = request.get_json()
 

@@ -6,4 +6,5 @@ i use sqlite as my database.
 i create an app.py file to handle my APIs.
 the endpoint for generating pin and serial number is api.add_resource(generate_pin, '/api/generate') 
 the endpoint for validating pin and serial number is api.add_resource(validate_pin, '/api/generate/validate')
+to validate the user has to input both the serial number and pin
 the validation endpoint returns 1 if pin is valid and 0 if invalid

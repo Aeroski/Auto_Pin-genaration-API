@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-from flask import(Flask,Blueprint,render_template,redirect,request,flash,url_for,session,logging)
+from flask import Flask,request,jsonify,session
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///generate.sqlite3"
 db=SQLAlchemy(app)

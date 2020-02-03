@@ -2,4 +2,4 @@ __pycache__
 
 .idea
 venv
-generate.sqlite3
+# generate.sqlite3

@@ -5,13 +5,14 @@ app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///generate.sqlite3"
 db=SQLAlchemy(app)
 
 class generate(db.Model):
-    id = db.Column('serial_number', db.Integer, primary_key=True)
+    id = db.Column('user id', db.Integer, primary_key=True)
+    serial_number = db.Column(db.String(100))
     pin = db.Column(db.String(50))
    
 
 
-    def __init__(self, pin):
+    def __init__(self,serial_number,pin):
+        self.serial_number = serial_number
         self.pin = pin
-       
 
         db.create_all()

@@ -24,7 +24,7 @@ db=SQLAlchemy(app)
 # this API is suppose to generate a random 
 class generate_pin(Resource):
 
-    def post(self):
+    def get (self):
 
         # the random funtion generates random 15 digits mixture of string and digits
         pin = ''.join([random.choice(string.digits) for n in range (15)])

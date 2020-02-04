@@ -1,6 +1,7 @@
 from flask import Flask,request,jsonify,session
 from flask_restful import Resource, Api
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 from model import generate
 import random
 import string
@@ -8,7 +9,6 @@ import os
 
 # instantiating the Flask class into app
 app = Flask(__name__)
-
 # instantiating the Api Class
 api = Api(app)
 
@@ -20,6 +20,7 @@ app.config['SECRET_KEY'] = "ABCD 12345"
 
 # instantiating the SQLAlchemy Class in db 
 db=SQLAlchemy(app)
+migrate = Migrate(app,db)
 
 #homepage
 class index(Resource):

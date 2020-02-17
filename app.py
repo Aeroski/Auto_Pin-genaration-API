@@ -36,33 +36,31 @@ api.add_resource(index, '/')
 class generate_pin(Resource):
 
     def get (self):
-
+        
         # the random funtion generates random 15 digits
         pin = ''.join([random.choice(string.digits) for n in range (15)])
 
-        # the random funtion generates random 15 digits mixture of string and digits as serial number
-        serial_number = ''.join([random.choice(string.ascii_letters+string.digits)for i in range(12)])
-        
-
-
-
         # creating a variable data and saving the value of the randomly generated pin and serial number
-        data = generate(serial_number,pin)
+        data = generate(pin)
 
         # adding the pin and serial_number to the database
         db.session.add(data)
-
         # commiting the new added items
         db.session.commit()
 
         # querying a column by the pin and saving it to the variable result
         result = generate.query.filter_by(pin = pin).first()
-        
+            
         # fetching the id of the particular pin and saving in s_N
-        s_n = result.serial_number
-        return {'pin': pin, "SN":s_n }
-        
- 
+           
+        i_d = result.id
+        s_n = '{:012}'.format(i_d)
+
+        return{'pin': pin, "SN":s_n }
+            
+
+            
+    
 
 
 
@@ -72,15 +70,21 @@ class validate_pin(Resource):
     def get(self,sn):
        
         # searching for that paticular serial number in the database
-        result = generate.query.filter_by(serial_number = sn).first()
-        
-        # if serial number is found it returns 1 for success
+        result = generate.query.filter_by(id = sn).first()
         if result:
-            return{"response":1}
+            # assign column id into variable data_id
+            data_id = result.id
+            # format  id to 12 digits
+            s_n = '{:012}'.format(data_id)
 
-        # else if pin is not found it returns o to represent failure
-        else:
-            return{"response": 0}    
+        
+            # compare length to make sure it is 12 digit
+            if len(s_n) == len(sn):
+                return{"response":1}
+
+            # else if pin is not found it returns o to represent failure
+        
+        return{"response": 0}    
 
 api.add_resource(validate_pin, '/api/generate/validate/<string:sn>')         
     

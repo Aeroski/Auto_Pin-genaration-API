@@ -3,7 +3,7 @@ from flask_restful import Resource, Api
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from model import generate
-import random
+import datetime
 import string
 import os
 
@@ -37,8 +37,12 @@ class generate_pin(Resource):
 
     def get (self):
         
-        # the random funtion generates random 15 digits
-        pin = ''.join([random.choice(string.digits) for n in range (15)])
+        # the random funtion generates random 15 digits using datetime
+        now = datetime.datetime.now()
+        # converting time to strinh and striping :,. and - from my expected output
+        now1 = str(now).replace(":","").replace(" ","").replace("-","").replace(".","")
+        pin = now1[:15]
+        # pin = ''.join([random.choice(string.digits) for n in range (15)])
 
         # creating a variable data and saving the value of the randomly generated pin and serial number
         data = generate(pin)
@@ -57,9 +61,7 @@ class generate_pin(Resource):
         s_n = '{:012}'.format(i_d)
 
         return{'pin': pin, "SN":s_n }
-            
-
-            
+        
     
 
 
